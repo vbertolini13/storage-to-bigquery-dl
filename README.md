@@ -1,6 +1,7 @@
-# Bash Dataflow
+# Bash Dataflow with CoGbk
 
-Dataflow read file with 19k rows from storage and extract top n gbk by nationality and save output in storage
+
+Dataflow reads two files from storage. The first with 1m of rows, the second with 138 rows, joining both(CoGbk) and saving the result in bigquery
 
 ## Ejectuar
-java -jar storage-to-storage-dl.jar --project=[id de proyecto] --zone=us-central1-a --runner=DataflowRunner --numWorkers=1 --workerMachineType=n1-standard-1
+java -jar storage-to-bigquery-dl.jar --project=[id de proyecto] --zone=us-central1-a --runner=DataflowRunner --numWorkers=1 --workerMachineType=n1-standard-1

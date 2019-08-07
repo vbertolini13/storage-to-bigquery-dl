@@ -19,8 +19,8 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>storage-to-storage-topn-dl</groupId>
-  <artifactId>storage-to-storage-topn-dl</artifactId>
+  <groupId>storage-to-bigquery-dl</groupId>
+  <artifactId>storage-to-bigquery-dl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
  <properties>
@@ -71,7 +71,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.example.storagetostorage.StarterPipeline</mainClass>
+							<mainClass>com.example.storagetobq.StarterPipeline</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -88,7 +88,7 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<finalName>topic-to-bigquery-dl</finalName>
+							<finalName>storage-to-bigquery-dl</finalName>
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
@@ -107,7 +107,7 @@
 
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-    							<mainClass>com.example.storagetostorage.StarterPipeline</mainClass>
+    							<mainClass>com.example.storagetobq.StarterPipeline</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
