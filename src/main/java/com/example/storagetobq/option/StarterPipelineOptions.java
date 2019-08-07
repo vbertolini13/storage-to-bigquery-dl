@@ -17,7 +17,7 @@ public interface StarterPipelineOptions extends PipelineOptions {
     void setInputFileBans(String value);
 
     @Description("Output bq in gcp dataset.table")
-    @Default.String("lol.champion_bans")
+    @Default.String("leagueoflegends.champion_bans")
     String getTableStagingFileLines();
     void setTableStagingFileLines(String value);
     
