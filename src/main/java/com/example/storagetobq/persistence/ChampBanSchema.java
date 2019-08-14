@@ -16,9 +16,10 @@ public class ChampBanSchema implements Serializable{
 
 	public static TableSchema getTableSchema() {
         List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("ID").setType("INTEGER"));
+        fields.add(new TableFieldSchema().setName("ID_CHAMPION").setType("INTEGER"));
         fields.add(new TableFieldSchema().setName("CHAMPION").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("CANTIDAD").setType("INTEGER"));
+        fields.add(new TableFieldSchema().setName("TURN").setType("INTEGER"));
+        fields.add(new TableFieldSchema().setName("ID_MATCH").setType("INTEGER"));
         return new TableSchema().setFields(fields);
     }
 

@@ -12,7 +12,7 @@ import com.example.storagetobq.domain.Ban;
 import com.example.storagetobq.domain.Champ;
 import com.example.storagetobq.domain.ChampBan;
 
-public class CoGbkToChampBanTransform extends PTransform<PCollection<KV<String, CoGbkResult>>,PCollection<KV<String, ChampBan>>>{
+public class CoGbkToChampBanTransform extends PTransform<PCollection<KV<String, CoGbkResult>>, PCollection<KV<String, ChampBan>>>{
 
 	/**
 	 * 

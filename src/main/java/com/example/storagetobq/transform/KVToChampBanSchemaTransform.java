@@ -5,10 +5,11 @@ import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
 
-import com.example.storagetobq.dofn.KVStringLongToTableRowDoFn;
+import com.example.storagetobq.dofn.KVToChampBanSchemaDoFn;
+import com.example.storagetobq.domain.ChampBan;
 import com.google.api.services.bigquery.model.TableRow;
 
-public class KVStringLongToChampBanTransform extends PTransform<PCollection<KV<String, Long>>, PCollection<TableRow>>{
+public class KVToChampBanSchemaTransform extends PTransform<PCollection<KV<String, ChampBan>>, PCollection<TableRow>>{
 
     /**
      * 
@@ -16,7 +17,7 @@ public class KVStringLongToChampBanTransform extends PTransform<PCollection<KV<S
     private static final long serialVersionUID = 32857647873620144L;
 
     @Override
-    public PCollection<TableRow> expand(PCollection<KV<String, Long>> input) {
-        return input.apply(ParDo.of(new KVStringLongToTableRowDoFn()));
+    public PCollection<TableRow> expand(PCollection<KV<String, ChampBan>> input) {
+        return input.apply(ParDo.of(new KVToChampBanSchemaDoFn()));
     }
 }

@@ -18,12 +18,10 @@
 package com.example.storagetobq;
 
 import static org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED;
-import static org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
-import org.apache.beam.sdk.transforms.Count;
 import org.apache.beam.sdk.transforms.join.CoGroupByKey;
 import org.apache.beam.sdk.transforms.join.KeyedPCollectionTuple;
 import org.apache.beam.sdk.values.KV;
@@ -37,7 +35,7 @@ import com.example.storagetobq.persistence.ChampBanSchema;
 import com.example.storagetobq.transform.BanToKeyValueTransform;
 import com.example.storagetobq.transform.ChampToKeyValueTransform;
 import com.example.storagetobq.transform.CoGbkToChampBanTransform;
-import com.example.storagetobq.transform.KVStringLongToChampBanTransform;
+import com.example.storagetobq.transform.KVToChampBanSchemaTransform;
 import com.example.storagetobq.transform.StringToBanTransform;
 import com.example.storagetobq.transform.StringToChampTransform;
 import com.example.storagetobq.util.Constants;
@@ -67,14 +65,14 @@ public class StarterPipeline {
         KeyedPCollectionTuple.of(champTupleTag, kvChamps).and(banTupleTag, kvBans)
         	.apply(Constants.CGK_CHAMP_BAN, CoGroupByKey.<String>create())
         	.apply(Constants.CGK_CHAMPBAN, new CoGbkToChampBanTransform(champTupleTag, banTupleTag))
-            .apply(Constants.COUNT_BY_CGK_CHAMPBAN, Count.perKey())
-            .apply(Constants.KV_SCHEMA, new KVStringLongToChampBanTransform())
+            //.apply(Constants.COUNT_BY_CGK_CHAMPBAN, Count.perKey())
+            .apply(Constants.KV_SCHEMA, new KVToChampBanSchemaTransform())
     		.apply(Constants.WRITE_CHAMPBAN, BigQueryIO.writeTableRows()
     				.to(options.getTableStagingFileLines())
     				.withSchema(ChampBanSchema.getTableSchema())
-    				.withCreateDisposition(CREATE_IF_NEEDED)
-    				.withWriteDisposition(WRITE_TRUNCATE));
-        
+					.withCreateDisposition(CREATE_IF_NEEDED)
+				    .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE));
+
         
         p.run().waitUntilFinish();
 

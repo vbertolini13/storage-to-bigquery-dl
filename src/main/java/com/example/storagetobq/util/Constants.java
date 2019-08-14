@@ -13,7 +13,7 @@ public class Constants {
     public static final String CGK_CHAMP_BAN = "CoGbk Champ and Ban";
     public static final String CGK_CHAMPBAN = "CoGbkResult to ChampBan";
     public static final String COUNT_BY_CGK_CHAMPBAN = "Count by Cgk ChamBan";
-    public static final String KV_SCHEMA = "Count KV to TableSchema";
+    public static final String KV_SCHEMA = "KV to TableSchema";
     public static final String WRITE_CHAMPBAN = "Write ChampBans Staging BigQuery";
     public static final String EXTENSION_CSV = ".csv";
 
